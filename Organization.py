@@ -13,7 +13,7 @@ def main():
     for file in files:
         print("\033[93m" + file + "\033[0m")
         # If you don't like this ↓ just comment it out 
-        #print("----------------------------------------------------------------------------------------------")
+        print("----------------------------------------------------------------------------------------------")
         #File Extension
         ext = file.split(".")[-1]
         #Create the folder if it doesn't exist
