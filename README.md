@@ -1,7 +1,7 @@
 # Organization
 
 ## Description
-#Created this in the intentions to clear some of the clutter and not waste time doing it. 
+Created this in the intentions to clear some of the clutter and not waste time doing it. 
 
 ## Getting Started
 
