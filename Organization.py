@@ -11,9 +11,9 @@ def main():
 
     #Loop through the files
     for file in files:
-        print("\033[93m" + file + "\033[0m")
+        print("\033[93m" "Selected " + file + "\033[0m")
         # If you don't like this ↓ just comment it out 
-        print("----------------------------------------------------------------------------------------------")
+        #print("----------------------------------------------------------------------------------------------")
         #File Extension
         ext = file.split(".")[-1]
         #Create the folder if it doesn't exist
@@ -23,12 +23,20 @@ def main():
         shutil.move(folder + "/" + file, folder + "/" + ext + "/" + file)   
         print("\033[92m" + file + " Moved Successfully" "\033[0m")
 
+        #Print out the file extension of each file 
+        print("\033[94m" + "File Extension: " + ext + "\033[0m")
+
+        #Print out the whole path of the location the file was moved to
+        print("\033[94m" + "File Location: " + folder + "/" + ext + "/" + file + "\033[0m")
+
+
+
         print("----------------------------------------------------------------------------------------------")
     again = input("Would you like to organize another folder? (y/n): ")
     if again == "y":
         main()
     else:
-        print("Night Night")
+        print("Exiting....")
         exit()
 
 
