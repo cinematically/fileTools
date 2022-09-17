@@ -47,6 +47,25 @@ It is known that there may not be any folder names matching with the filetype(Ca
    File Renamer
    - Let's the user input a location that they would like to have all the items inside renamed starting from 1 and going up.
    
+* 0.3
+   * Added new Functions 
+   -------
+   filedata
+   filetype
+   
+   File Data
+   - Let's the suer input a location in which they would like to see the following data
+        Creation Date
+        Modification Date
+        Access Date
+        File Location
+        File Size
+        
+   File Type
+   - Let's the user specify a location in which they would like to see the filetypes and have them printed to console or txt
+  
+   
+   
 
 ## License
 
