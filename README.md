@@ -7,7 +7,7 @@ Created this in the intentions to clear some of the clutter that I had laying ar
 
 ### Dependencies
 
-* Python3
+* Python 3.10
 
 ### Installing
 
