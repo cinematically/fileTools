@@ -1,7 +1,7 @@
-# Organization
+# File Tools
 
 ## Description
-Created this in the intentions to clear some of the clutter and not waste time doing it. 
+Created this in the intentions to clear some of the clutter that I had laying around and organize everything.
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ Created this in the intentions to clear some of the clutter and not waste time d
 ### Executing program
 * Open the script with the command below
 
-* python3 Organization.py 
+* python3 fileTools.py 
 
 * Follow the steps that are given to you within the terminal
 
@@ -30,6 +30,23 @@ It is known that there may not be any folder names matching with the filetype(Ca
 
 * 0.1
     * Initial Release
+    fileorganizer
+    
+    File Organizer 
+    - This was the main release of the project and the project was orignially called Organization, but turned into fileTools after a bit of time :)
+    
+* 0.2
+   * Added new Functions 
+   -------
+   filelist
+   filerenamer
+   
+   File List
+   - Let's the user input a location that they would like to list all of the items inside
+   
+   File Renamer
+   - Let's the user input a location that they would like to have all the items inside renamed starting from 1 and going up.
+   
 
 ## License
 
