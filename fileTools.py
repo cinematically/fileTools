@@ -8,23 +8,24 @@ def main():
     function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | Exit): ")
     # If the user inputs fileOrganizer then run the fileOrganizer function
     # Make them case insensitive
-    if function.lower() == "fileorganizer":
-        fileOrganizer()
     # If the user inputs FileRenamer then run the fileRenamer function
-    if function.lower() == "filerenamer":
-        fileRenamer()
     # If the user inputs FileList then run the fileList function
-    if function.lower() == "filelist":
-        fileList()
     # If the user inputs filedata then run the filedata function
-    if function.lower() == "filedata":
-        fileData()
     #If the user input filetype then run the filetype function
-    if function.lower() == "filetype":
-        fileType()
     # If the user inputs Exit then exit the program
-    if function.lower() == "exit":
-        exit()
+    match function.lower():
+        case "fileorganizer":
+            fileOrganizer()
+        case "filerenamer":
+            fileRenamer()
+        case "filelist":
+            fileList()
+        case "filedata":
+            fileData()
+        case "filetype":
+            fileType()
+        case "exit":
+            exit()
     print("----------------------------------------------------------------------------------------------")
     print("\033[91m" + "Exiting fileTools" + "\033[0m")
 
@@ -77,16 +78,17 @@ def fileType():
             #If the user inputs y then ask the user which function they would like to use
             if other == "y":
                 function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
-                if function == "fileOrganizer":
-                    fileOrganizer()
-                if function == "fileList":
-                    fileList()        
-                if function == "fileData":
-                    fileData()
-                if function == "fileRenamer":
-                    fileRenamer()
-                if function == "Exit":
-                    exit()
+                match function:
+                    case "fileOrganizer":
+                        fileOrganizer()
+                    case "fileList":
+                        fileList()        
+                    case "fileData":
+                        fileData()
+                    case "fileRenamer":
+                        fileRenamer()
+                    case "Exit":
+                        exit()
 
 def fileData():
     #Let the user select a folder and select all the files in the folder
@@ -117,8 +119,8 @@ def fileData():
                 f.write("Time: | " + time.strftime("%I:%M:%S %p", time.localtime()) + "\n")
                 f.write("----------------------------------------------------------------------------------------------" + "\n")
         print(colors.GREEN + colors.BOLD + "File has been saved!" + colors.END)
-        exit = input("Would you like to exit the program? (y/n): ")
-        if exit == "y":
+        _exit = input("Would you like to exit the program? (y/n): ")
+        if _exit == "y":
             exit()
         else:
             main()
@@ -162,14 +164,15 @@ def fileOrganizer():
         other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
             function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
-            if function == "fileList":
-                fileList()        
-            if function == "fileType":
-                fileType()
-            if function == "fileData":
-                fileData()
-            if function == "Exit":
-                exit()             
+            match function.lower():
+                case "fileList":
+                    fileList()        
+                case "fileType":
+                    fileType()
+                case "fileData":
+                    fileData()
+                case "Exit":
+                    exit()             
 
 def fileRenamer():
     folder = input("Enter the folder you would like to rename the images in: ")
@@ -194,16 +197,17 @@ def fileRenamer():
         other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
             function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
-            if function == "fileOrganizer":
-                fileOrganizer()  
-            if function == "fileList":
-                fileList()        
-            if function == "fileType":
-                fileType()
-            if function == "fileData":
-                fileData()
-            if function == "Exit":
-                exit()
+            match function.lower():
+                case "fileOrganizer":
+                    fileOrganizer()  
+                case "fileList":
+                    fileList()        
+                case "fileType":
+                    fileType()
+                case "fileData":
+                    fileData()
+                case "Exit":
+                    exit()
 
 def fileList():
     folder = input("Enter the folder you would like to list the images in: ")
@@ -229,14 +233,15 @@ def fileList():
             other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
             function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
-            if function == "fileOrganizer":
-                fileOrganizer()       
-            if function == "fileType":
-                fileType()
-            if function == "fileData":
-                fileData()
-            if function == "Exit":
-                exit()
+            match function.lower():
+                case "fileOrganizer":
+                    fileOrganizer()       
+                case "fileType":
+                    fileType()
+                case "fileData":
+                    fileData()
+                case "Exit":
+                    exit()
                 
 if __name__ == "__main__":
     main()
