@@ -6,13 +6,6 @@ import time
 def main():
     # Ask the user to input a function that they would like to use 
     function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | Exit): ")
-    # If the user inputs fileOrganizer then run the fileOrganizer function
-    # Make them case insensitive
-    # If the user inputs FileRenamer then run the fileRenamer function
-    # If the user inputs FileList then run the fileList function
-    # If the user inputs filedata then run the filedata function
-    #If the user input filetype then run the filetype function
-    # If the user inputs Exit then exit the program
     match function.lower():
         case "fileorganizer":
             fileOrganizer()
