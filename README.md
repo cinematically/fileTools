@@ -37,8 +37,8 @@ It is known that there may not be any folder names matching with the filetype(Ca
     - This was the main release of the project and the project was orignially called Organization, but turned into fileTools after a bit of time :)
     
 * 0.2
-   * Added new Functions 
    -------
+   * Added new Functions 
    filelist
    filerenamer
    
@@ -49,8 +49,8 @@ It is known that there may not be any folder names matching with the filetype(Ca
    - Let's the user input a location that they would like to have all the items inside renamed starting from 1 and going up.
    
 * 0.3
-   * Added new Functions 
    -------
+   * Added new Functions 
    filedata
    filetype
    
