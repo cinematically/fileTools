@@ -63,6 +63,12 @@ It is known that there may not be any folder names matching with the filetype(Ca
         
    File Type
    - Let's the user specify a location in which they would like to see the filetypes and have them printed to console or txt
+   
+ * 0.4
+   * Added filealphabetizer
+      File Alphabetizer
+      -  Let's the user input a folder which gets scanned by the tool and prints out the information alphabetically 
+      
   
    
    
