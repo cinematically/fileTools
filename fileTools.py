@@ -5,7 +5,7 @@ import time
 
 def main():
     # Ask the user to input a function that they would like to use 
-    function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | Exit): ")
+    function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileAlphabetizer | Exit): ")
     match function.lower():
         case "fileorganizer":
             fileOrganizer()
@@ -17,6 +17,8 @@ def main():
             fileData()
         case "filetype":
             fileType()
+        case "filealphabetizer":
+            fileAlphabetizer()
         case "exit":
             exit()
     print("----------------------------------------------------------------------------------------------")
@@ -34,6 +36,38 @@ class colors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     END = '\033[0m'
+
+def fileAlphabetizer():
+        file = input("Enter the file Location: ")
+        if os.path.isfile(file):
+            print("The file name you entered was found.")
+            print("Alphabetizing the file...")
+            file = open(file, "r")
+            lines = file.readlines()
+            lines.sort()
+            file.close()
+            name = input("What would you like to name your Saved File: ")
+            newFile = open(name + ".txt", "w")
+            newFile.writelines(lines)
+            newFile.close()
+            print("The file has been alphabetized.")
+            print("----------------------------------------------------------------------------------------------")
+            other = input("Would you like to use any of the other functions? (y/n): ")
+            if other == "y":
+                function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
+                match function:
+                    case "fileOrganizer":
+                        fileOrganizer()
+                    case "fileList":
+                        fileList()        
+                    case "fileData":
+                        fileData()
+                    case "fileRenamer":
+                        fileRenamer()
+                    case "Exit":
+                        exit()
+        else:
+            exit()
 
 def fileType():
     # Asks the user to input a location that they would like the file extentions to be listed
@@ -53,24 +87,16 @@ def fileType():
 
     #Ask the user if they wish to save the file extentions to a text file
     save = input("Would you like to save the file extentions to a text file? (y/n): ")
-    #If the user inputs y then save the file extentions to a text file
     if save == "y":
-        #Ask the user to input the name of the text file
         name = input("Enter the name of the text file: ")
-        #Create the text file
         with open(name + ".txt", "w") as f:
-            #Loop through all of the images inside the folder 
             for file in files:
-                #Write the file extentions to the text file
                 f.write(file.split(".")[-1] + "\n")
-            #Print out the file extentions to the console
             print("\033[92m" + "File extentions saved to " + name + ".txt" + "\033[0m")
             print("----------------------------------------------------------------------------------------------")
-            #Ask the user if they wish to use any of the other functions
             other = input("Would you like to use any of the other functions? (y/n): ")
-            #If the user inputs y then ask the user which function they would like to use
             if other == "y":
-                function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
+                function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileAlphabetizer | Exit ): ")
                 match function:
                     case "fileOrganizer":
                         fileOrganizer()
@@ -80,6 +106,8 @@ def fileType():
                         fileData()
                     case "fileRenamer":
                         fileRenamer()
+                    case "fileAlphabetizer":
+                        FileAlphabetizer()
                     case "Exit":
                         exit()
 
@@ -112,11 +140,23 @@ def fileData():
                 f.write("Time: | " + time.strftime("%I:%M:%S %p", time.localtime()) + "\n")
                 f.write("----------------------------------------------------------------------------------------------" + "\n")
         print(colors.GREEN + colors.BOLD + "File has been saved!" + colors.END)
-        _exit = input("Would you like to exit the program? (y/n): ")
-        if _exit == "y":
-            exit()
-        else:
-            main()
+        # Ask to go to the main menu or exit
+        other = input("Would you like to use any of the other functions? (y/n): ")
+        if other == "y":
+            function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileAlphabetizer | Exit ): ")
+            match function:
+                case "fileOrganizer":
+                    fileOrganizer()
+                case "fileList":
+                    fileList()        
+                case "fileData":
+                    fileData()
+                case "fileRenamer":
+                    fileRenamer()
+                case "fileAlphabetizer":
+                    fileAlphabetizer()
+                case "Exit":
+                    exit()
     #If the user doesn't want to save the file then print it to the console, print that the file was not saved in red and bold using the custom variable///////
     else:
         print(colors.RED + colors.BOLD + "File was not saved!" + colors.END)
@@ -164,6 +204,8 @@ def fileOrganizer():
                     fileType()
                 case "fileData":
                     fileData()
+                case "filealpabetizer":
+                    fileAlphabetizer()
                 case "Exit":
                     exit()             
 
@@ -199,6 +241,8 @@ def fileRenamer():
                     fileType()
                 case "fileData":
                     fileData()
+                case "filealphabetizer":
+                    fileAlphabetizer()
                 case "Exit":
                     exit()
 
@@ -233,6 +277,8 @@ def fileList():
                     fileType()
                 case "fileData":
                     fileData()
+                case "fileAlphabetizer":
+                    fileAlphabetizer()
                 case "Exit":
                     exit()
                 
