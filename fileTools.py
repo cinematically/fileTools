@@ -1,11 +1,13 @@
 import os
 import shutil
 import time
+import base64
 
 
 def main():
+    
     # Ask the user to input a function that they would like to use 
-    function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileAlphabetizer | Exit): ")
+    function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | Exit): ")
     match function.lower():
         case "fileorganizer":
             fileOrganizer()
@@ -19,10 +21,12 @@ def main():
             fileType()
         case "filealphabetizer":
             fileAlphabetizer()
+        case "fileencoder":
+            fileEncoder()
         case "exit":
             exit()
     print("----------------------------------------------------------------------------------------------")
-    print("\033[91m" + "Exiting fileTools" + "\033[0m")
+    print("\033[92m" + "Exiting fileTools..." + "\033[0m")
 
 class colors:
     
@@ -36,6 +40,84 @@ class colors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     END = '\033[0m'
+
+def fileEncoder():
+
+# Ask the user to input a location that they would like to be encoded or decoded with base64
+    encoder = input("Enter the location you would like to be encoded or decoded with base64: ")
+# Selecting all files in the folder
+    files = os.listdir(encoder)
+# Listing the files in the folder
+    print("\033[92mFiles in the folder↓\033[0m")
+    #Loop through all of the files in the folder and see if they can be encoded or decoded with base64 
+    for file in files:
+        print("\033[93m" "Selected " + file + "\033[0m")
+
+        #Print out the file extension of each file 
+        print("\033[94m" + "File Extension: " + file.split(".")[-1] + "\033[0m")
+        #Check if the file extension is a .txt file 
+        if file.split(".")[-1] == "txt":
+            #Open the file and read it 
+            file = open(file, "r")
+            #Read the file 
+            data = file.read()
+            #Encode the file with base64 
+            encoded = base64.b64encode(data.encode())
+            #Decode the file with base64 
+            decoded = base64.b64decode(encoded)
+            #Print out the encoded and decoded data 
+            print("\033[92m" + "Encoded Data: " + str(encoded) + "\033[0m")
+            print("\033[92m" + "Decoded Data: " + str(decoded) + "\033[0m")
+        else:
+            print("\033[91m" + "This file cannot be encoded or decoded with base64" + "\033[0m")
+        print("----------------------------------------------------------------------------------------------")
+        #Ask the user if they would like to use any of the other functions
+        other = input("Would you like to use any of the other functions? (y/n): ")
+        if other == "y":
+            function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | Exit): ")
+            match function:
+                case "fileOrganizer":
+                    fileOrganizer()
+                case "fileRenamer":
+                    fileRenamer()                    
+                case "fileList":
+                    fileList()        
+                case "fileData":
+                    fileData()
+                case "fileType":
+                    fileType()
+                case "filealphabetizer":
+                    fileAlphabetizer()
+                case "Exit":
+                    exit()
+        else:
+            #Ask they if they wish to save which files they have encoded or decoded with base64
+            save = input("Would you like to save the files you have encoded or decoded with base64? (y/n): ")
+            if save == "y":
+                #Ask the user to input a location and name for the file or if they wish to save it in the current directory
+                location = input("Enter the location you would like to save the file in: ")
+                name = input("Enter the name you would like to save the file as(Autoadds .txt to end :) : ")
+                #Open the file and write the encoded and decoded data to the file
+                file = open(location + "/" + name + ".txt", "w")
+                file.write("Encoded Data: " + str(encoded) + "" + "Decoded Data: " + str(decoded))
+                file.close()
+                print("The file has been saved.")
+                print("----------------------------------------------------------------------------------------------")
+                #Ask the user if they would like to use any of the other functions
+                other = input("Would you like to use any of the other functions? (y/n): ")
+                if other == "y":
+                    function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
+                    match function:
+                        case "fileOrganizer":
+                            fileOrganizer()
+                        case "fileList":
+                            fileList()        
+                        case "fileData":
+                            fileData()
+                        case "fileRenamer":
+                            fileRenamer()
+                        case "Exit":
+                            exit()
 
 def fileAlphabetizer():
         file = input("Enter the file Location: ")
@@ -54,18 +136,22 @@ def fileAlphabetizer():
             print("----------------------------------------------------------------------------------------------")
             other = input("Would you like to use any of the other functions? (y/n): ")
             if other == "y":
-                function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
-                match function:
-                    case "fileOrganizer":
-                        fileOrganizer()
-                    case "fileList":
-                        fileList()        
-                    case "fileData":
-                        fileData()
-                    case "fileRenamer":
-                        fileRenamer()
-                    case "Exit":
-                        exit()
+                function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileEncoder | Exit): ")
+            match function:
+                case "fileOrganizer":
+                    fileOrganizer()
+                case "fileRenamer":
+                    fileRenamer()                    
+                case "fileList":
+                    fileList()        
+                case "fileData":
+                    fileData()
+                case "fileType":
+                    fileType()
+                case "fileencoder":
+                    fileEncoder()
+                case "Exit":
+                    exit()
         else:
             exit()
 
@@ -96,7 +182,7 @@ def fileType():
             print("----------------------------------------------------------------------------------------------")
             other = input("Would you like to use any of the other functions? (y/n): ")
             if other == "y":
-                function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileAlphabetizer | Exit ): ")
+                function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | Exit ): ")
                 match function:
                     case "fileOrganizer":
                         fileOrganizer()
@@ -108,6 +194,8 @@ def fileType():
                         fileRenamer()
                     case "fileAlphabetizer":
                         FileAlphabetizer()
+                    case "fileEncoder":
+                        fileEncoder()
                     case "Exit":
                         exit()
 
@@ -143,7 +231,7 @@ def fileData():
         # Ask to go to the main menu or exit
         other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
-            function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileAlphabetizer | Exit ): ")
+            function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | Exit ): ")
             match function:
                 case "fileOrganizer":
                     fileOrganizer()
@@ -155,6 +243,8 @@ def fileData():
                     fileRenamer()
                 case "fileAlphabetizer":
                     fileAlphabetizer()
+                case "fileEncoder":
+                    fileEncoder()
                 case "Exit":
                     exit()
     #If the user doesn't want to save the file then print it to the console, print that the file was not saved in red and bold using the custom variable///////
@@ -196,15 +286,19 @@ def fileOrganizer():
     else:
         other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
-            function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
-            match function.lower():
+            function = input("Which function would you like to use? ( FileRenamer | FileList | FileData | FileType | FileEncoder | FileAlphabetizer | Exit): ")
+            match function:
+                case "fileRenamer":
+                    fileRenamer()                    
                 case "fileList":
                     fileList()        
-                case "fileType":
-                    fileType()
                 case "fileData":
                     fileData()
-                case "filealpabetizer":
+                case "fileType":
+                    fileType()
+                case "fileencoder":
+                    fileEncoder()
+                case "fileAlphabetizer":
                     fileAlphabetizer()
                 case "Exit":
                     exit()             
@@ -231,7 +325,7 @@ def fileRenamer():
         #
         other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
-            function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
+            function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileEncoder | FileAlphabetizer | Exit): ")
             match function.lower():
                 case "fileOrganizer":
                     fileOrganizer()  
@@ -243,6 +337,8 @@ def fileRenamer():
                     fileData()
                 case "filealphabetizer":
                     fileAlphabetizer()
+                case "fileencoder":
+                    fileEncoder()
                 case "Exit":
                     exit()
 
@@ -269,16 +365,18 @@ def fileList():
         else:
             other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
-            function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
+            function = input("Which function would you like to use? ( FileOrganizer | FileData | FileType | FileEncoder | FileAlphabetizer | Exit): ")
             match function.lower():
                 case "fileOrganizer":
-                    fileOrganizer()       
+                    fileOrganizer()         
                 case "fileType":
                     fileType()
                 case "fileData":
                     fileData()
-                case "fileAlphabetizer":
+                case "filealphabetizer":
                     fileAlphabetizer()
+                case "fileencoder":
+                    fileEncoder()
                 case "Exit":
                     exit()
                 
