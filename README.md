@@ -67,15 +67,19 @@ It is known that there may not be any folder names matching with the filetype(Ca
    
  * 0.4
    -------
-   * Added filealphabetizer
+   * Added new Function
+     filealphabetizer
+      
       File Alphabetizer
       -  Let's the user input a folder which gets scanned by the tool and prints out the information alphabetically 
 
  * 0.5
    -------
-   * Added fileencoder
-      File Encoder
-      -  Let's the user input a folder which gets scanned by the tool (I believe it currently only works on txt files... I didn't try it on anything else yet) and then encodes or decodes.. Whatever the user inputs >:)
+   * Added new Function
+     fileencoder
+    
+      File Encoder/Decoder
+      -Let's the user input a folder which gets scanned by the tool (I believe it currently only works on txt files... I didn't try it on anything else yet) and then encodes or decodes.. Whatever the user inputs >:) THIS ALSO DOES DECODE TOO!
       
   
    
