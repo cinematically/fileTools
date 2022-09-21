@@ -38,7 +38,7 @@ It is known that there may not be any folder names matching with the filetype(Ca
     
 * 0.2
    -------
-   * Added new Functions 
+   * Added a new Functions 
    filelist
    filerenamer
    
@@ -50,7 +50,7 @@ It is known that there may not be any folder names matching with the filetype(Ca
    
 * 0.3
    -------
-   * Added new Functions 
+   * Added a new Functions 
    filedata
    filetype
    
@@ -67,23 +67,31 @@ It is known that there may not be any folder names matching with the filetype(Ca
    
  * 0.4
    -------
-   * Added new Function
+   * Added a new Function
      filealphabetizer
       
       File Alphabetizer
-      -  Let's the user input a folder which gets scanned by the tool and prints out the information alphabetically 
+     -  Let's the user input a folder which gets scanned by the tool and prints out the information alphabetically 
 
  * 0.5
    -------
-   * Added new Function
+   * Added a new Function
      fileencoder
     
       File Encoder/Decoder
       -Let's the user input a folder which gets scanned by the tool (I believe it currently only works on txt files... I didn't try it on anything else yet) and then encodes or decodes.. Whatever the user inputs >:) THIS ALSO DOES DECODE TOO!
-      
-  
-   
-   
+ 
+  * 0.6
+  ------- 
+  * Added 2 but techniqually 1 real useable function  
+    fileversion
+    filecompression
+    
+    File Version
+    - Basically from now on I will be changing a variable inside of the script so you know what version that you are on, Rather doing it this way I having to add another dependency to this project :)) and easier to debug problems quicker
+
+    File Compression
+    - Select a location in which you have a bunch of files, pick a save location for the compression zip/tar/tar.gz and compresses the file for you!
 
 ## License
 
