@@ -7,7 +7,7 @@ import base64
 def main():
     
     # Ask the user to input a function that they would like to use 
-    function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | Exit): ")
+    function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | FileCompression | FileVersion | Exit): ")
     match function.lower():
         case "fileorganizer":
             fileOrganizer()
@@ -23,72 +23,154 @@ def main():
             fileAlphabetizer()
         case "fileencoder":
             fileEncoder()
+        case "fileversion":
+            fileVersion()
+        case "filecompression":
+            fileCompression()
         case "exit":
             exit()
     print("----------------------------------------------------------------------------------------------")
     print("\033[92m" + "Exiting fileTools..." + "\033[0m")
 
+Version = "0.6"
+Author = "xKomorebi"
+Contributors = "WOLFIE-OG(https://github.com/WOLFIE-OG)"
+
 class colors:
     
-    GREY = '\033[95m'
-    CYAN = '\033[96m'
-    DARKCYAN = '\033[36m'
+    PINK = '\033[95m'
+    MAGENTA = '\033[95m'
+    CYAN = '\033[36m'
     BLUE = '\033[94m'
     GREEN = '\033[92m'
     YELLOW = '\033[93m'
+    GREY = '\033[90m'
+    WHITE = '\033[97m'
     RED = '\033[91m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
     END = '\033[0m'
 
-def fileEncoder():
+def fileCompression():
+    folder = input("Enter the folder you would like to compress the files in: ")
+    name = input("What would you like to name the compressed file: ")
+    compression = input("What type of compression would you like to use? (zip | tar | tar.gz | tar.bz2): ")
+    delete = input("Would you like to delete the original files? (y/n): ")
+    saved = input("Where would you like to save the compressed file: ")
+    compress = input("Would you like to compress the files in the folder? (y/n): ")
+    if compress == "y":
+        if compression == "zip":
+            shutil.make_archive(name, 'zip', folder)
+            if delete == "y":
+                #Delete the original files
+                shutil.rmtree(folder)
+            else:
+                pass
+        elif compression == "tar":
+            shutil.make_archive(name, 'tar', folder)
+            if delete == "y":
+                shutil.rmtree(folder)
+            else:
+                pass
+        elif compression == "tar.gz":
+            shutil.make_archive(name, 'gztar', folder)
+            if delete == "y":
+                shutil.rmtree(folder)
+            else:
+                pass
+        elif compression == "tar.bz2":
+            shutil.make_archive(name, 'bztar', folder)
+            if delete == "y":
+                shutil.rmtree(folder)
+            else:
+                pass
+            #Ask the user if they wish to reuse the function fileCompression or use another function
+            print("----------------------------------------------------------------------------------------------")
+            other = input("Would you like to use any of the other functions? (y/n): ")
+            if other == "y":
+                function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileEncoder | Exit): ")
+                match function.lower:
+                    case "fileorganizer":
+                        fileOrganizer()
+                    case "filerenamer":
+                        fileRenamer()
+                    case "filelist":
+                        fileList()
+                    case "filedata":
+                        fileData()
+                    case "filetype":
+                        fileType()
+                    case "fileencoder":
+                        fileEncoder()
+                    case "Exit":
+                        exit()
 
-# Ask the user to input a location that they would like to be encoded or decoded with base64
-    encoder = input("Enter the location you would like to be encoded or decoded with base64: ")
-# Selecting all files in the folder
-    files = os.listdir(encoder)
-# Listing the files in the folder
-    print("\033[92mFiles in the folder↓\033[0m")
-    #Loop through all of the files in the folder and see if they can be encoded or decoded with base64 
-    for file in files:
-        print("\033[93m" "Selected " + file + "\033[0m")
-
-        #Print out the file extension of each file 
-        print("\033[94m" + "File Extension: " + file.split(".")[-1] + "\033[0m")
-        #Check if the file extension is a .txt file 
-        if file.split(".")[-1] == "txt":
-            #Open the file and read it 
-            file = open(file, "r")
-            #Read the file 
-            data = file.read()
-            #Encode the file with base64 
-            encoded = base64.b64encode(data.encode())
-            #Decode the file with base64 
-            decoded = base64.b64decode(encoded)
-            #Print out the encoded and decoded data 
-            print("\033[92m" + "Encoded Data: " + str(encoded) + "\033[0m")
-            print("\033[92m" + "Decoded Data: " + str(decoded) + "\033[0m")
-        else:
-            print("\033[91m" + "This file cannot be encoded or decoded with base64" + "\033[0m")
+def fileVersion():
+        print(colors.GREEN + colors.BOLD + "The current fileTools Version: " + Version + colors.END)
+        print(colors.YELLOW + colors.BOLD + "Created By: " + Author + colors.END)
+        print(colors.CYAN + colors.BOLD + "Contributors: " + Contributors + colors.END)
         print("----------------------------------------------------------------------------------------------")
-        #Ask the user if they would like to use any of the other functions
         other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
-            function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | Exit): ")
-            match function:
-                case "fileOrganizer":
+            function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | FileCompression | Exit ): ")
+            match function.lower:
+                case "fileorganizer":
                     fileOrganizer()
-                case "fileRenamer":
-                    fileRenamer()                    
-                case "fileList":
+                case "filelist":
                     fileList()        
-                case "fileData":
+                case "filedata":
                     fileData()
-                case "fileType":
+                case "filerenamer":
+                    fileRenamer()
+                case "filealphabetizer":
+                    FileAlphabetizer()
+                case "fileencoder":
+                    fileEncoder()
+                case "filecompression":
+                    fileCompression()
+                case "exit":
+                    exit()
+
+def fileEncoder():
+    encoder = input("Enter the location you would like to be encoded or decoded with base64: ")
+    files = os.listdir(encoder)
+    print(colors.YELLOW + colors.BOLD + "Files in the folder ↓" + colors.END)
+
+    for file in files:
+        print(colors.CYAN + colors.BOLD + colors.UNDERLINE + file + colors.END)
+        print("----------------------------------------------------------------------------------------------")
+        print(colors.GREEN + colors.BOLD + "File Extension: " + colors.END + os.path.splitext(file)[1])
+        if file.split(".")[-1] == "txt":
+            file = open(file, "r")
+            data = file.read()
+            encoded = base64.b64encode(data.encode())
+            decoded = base64.b64decode(encoded)
+            print(colors.GREEN + colors.UNDERLINE + "Encoded Data: " + encoded.decode() + colors.END)
+            print(colors.CYAN + colors.UNDERLINE + "Decoded Data: " + decoded.decode() + colors.END)
+        else:
+            print(colors.RED + "File is not able to be encoded or decoded with base64" + colors.END)
+        print("----------------------------------------------------------------------------------------------")
+        other = input("Would you like to use any of the other functions? (y/n): ")
+        if other == "y":
+            function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | FileCompression | Exit): ")
+            match function.lower():
+                case "fileorganizer":
+                    fileOrganizer()
+                case "filerenamer":
+                    fileRenamer()                    
+                case "filelist":
+                    fileList()        
+                case "filedata":
+                    fileData()
+                case "filetype":
                     fileType()
                 case "filealphabetizer":
                     fileAlphabetizer()
-                case "Exit":
+                case "filecompression":
+                    fileCompression()     
+                case "fileversion":
+                    fileVersion()               
+                case "exit":
                     exit()
         else:
             #Ask they if they wish to save which files they have encoded or decoded with base64
@@ -106,17 +188,23 @@ def fileEncoder():
                 #Ask the user if they would like to use any of the other functions
                 other = input("Would you like to use any of the other functions? (y/n): ")
                 if other == "y":
-                    function = input("Which function would you like to use? (FileOrganizer/FileList/FileData/FileType/Exit): ")
-                    match function:
-                        case "fileOrganizer":
+                    function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | FileCompression | Exit): ")
+                    match function.lower:
+                        case "fileorganizer":
                             fileOrganizer()
-                        case "fileList":
+                        case "filelist":
                             fileList()        
-                        case "fileData":
+                        case "filedata":
                             fileData()
-                        case "fileRenamer":
+                        case "filerenamer":
                             fileRenamer()
-                        case "Exit":
+                        case "filecompression":
+                            fileCompression()
+                        case "fileversion":
+                            fileVersion()
+                        case "fileencoder":
+                            fileEncoder()
+                        case "exit":
                             exit()
 
 def fileAlphabetizer():
@@ -137,20 +225,22 @@ def fileAlphabetizer():
             other = input("Would you like to use any of the other functions? (y/n): ")
             if other == "y":
                 function = input("Which function would you like to use? (FileOrganizer | FileRenamer | FileList | FileData | FileType | FileEncoder | Exit): ")
-            match function:
-                case "fileOrganizer":
+            match function.lower():
+                case "fileorganizer":
                     fileOrganizer()
-                case "fileRenamer":
+                case "filerenamer":
                     fileRenamer()                    
-                case "fileList":
+                case "filelist":
                     fileList()        
-                case "fileData":
+                case "filedata":
                     fileData()
-                case "fileType":
+                case "filetype":
                     fileType()
                 case "fileencoder":
                     fileEncoder()
-                case "Exit":
+                case "filecompression":
+                    fileCompression()
+                case "exit":
                     exit()
         else:
             exit()
@@ -161,14 +251,12 @@ def fileType():
     # Selecting all files in the folder
     files = os.listdir(folder)
     # Listing the files in the folder
-    print("\033[92mFiles in the folder↓\033[0m")
+    print(colors.YELLOW + colors.BOLD + "Files in the folder ↓" + colors.END)
     #Loop through all of the images inside the folder 
     for file in files:
-        #Count each file extension
-        print("\033[93m" "Selected " + file + "\033[0m")
-        #Print out the file extension of each file 
-        print("\033[94m" + "File Extension: " + file.split(".")[-1] + "\033[0m")
-        
+        print(colors.GREEN + colors.BOLD + colors.UNDERLINE + file + colors.END)
+        #Print out the file extension of each file using the custom color class yellow and bold 
+        print(colors.GREEN + colors.BOLD + "File Extension: " + colors.END + os.path.splitext(file)[1])
         print("----------------------------------------------------------------------------------------------")
 
     #Ask the user if they wish to save the file extentions to a text file
@@ -178,25 +266,30 @@ def fileType():
         with open(name + ".txt", "w") as f:
             for file in files:
                 f.write(file.split(".")[-1] + "\n")
-            print("\033[92m" + "File extentions saved to " + name + ".txt" + "\033[0m")
+            #Print out the file extentions have been saved to with the custom colors class in bold and green 
+            print(colors.GREEN + colors.BOLD + "File extentions have been saved to " + name + ".txt" + colors.END)
             print("----------------------------------------------------------------------------------------------")
             other = input("Would you like to use any of the other functions? (y/n): ")
             if other == "y":
-                function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | Exit ): ")
-                match function:
-                    case "fileOrganizer":
+                function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | FileCompression | Exit ): ")
+                match function.lower():
+                    case "fileorganizer":
                         fileOrganizer()
-                    case "fileList":
+                    case "filelist":
                         fileList()        
-                    case "fileData":
+                    case "filedata":
                         fileData()
-                    case "fileRenamer":
+                    case "filerenamer":
                         fileRenamer()
-                    case "fileAlphabetizer":
+                    case "filealphabetizer":
                         FileAlphabetizer()
-                    case "fileEncoder":
+                    case "fileencoder":
                         fileEncoder()
-                    case "Exit":
+                    case "filecompression":
+                        fileCompression()
+                    case "fileversion":
+                        fileVersion()
+                    case "exit":
                         exit()
 
 def fileData():
@@ -206,11 +299,11 @@ def fileData():
     # Print out the "Files in the Folder" in green and bold using the custom colors class
     print(colors.GREEN + colors.BOLD + "Files in the folder↓" + colors.END)
     for file in files:
-        print(colors.GREY + colors.BOLD + "Selected " + file + colors.END)
+        print(colors.WHITE + colors.BOLD + "Selected " + file + colors.END)
         print(colors.GREEN + colors.BOLD + "Creation Date: " + time.ctime(os.path.getctime(folder + "/" + file)) + colors.END)
         print(colors.BLUE + colors.BOLD + "Modification Date:  | " + time.ctime(os.path.getmtime(folder + "/" + file)) + colors.END)
         print(colors.YELLOW + colors.BOLD + "Access Date:  | " + time.ctime(os.path.getatime(folder + "/" + file)) + colors.END)
-        print(colors.GREY + colors.BOLD + "File Location: | " + folder + "/" + file + colors.END)
+        print(colors.GREY + colors.BOLD + "File Location: " + folder + "/" + file + colors.END)
         print(colors.GREEN + colors.BOLD + "File Size: | " + str(round(os.path.getsize(folder + "/" + file) / 1000000, 2)) + " MB" + colors.END)
         print(colors.RED + colors.BOLD + "Time: | " + time.strftime("%I:%M:%S %p", time.localtime()) + colors.END)
         print("----------------------------------------------------------------------------------------------")
@@ -231,21 +324,25 @@ def fileData():
         # Ask to go to the main menu or exit
         other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
-            function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | Exit ): ")
-            match function:
-                case "fileOrganizer":
+            function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileAlphabetizer | FileEncoder | FileCompression | Exit ): ")
+            match function.lower():
+                case "fileorganizer":
                     fileOrganizer()
-                case "fileList":
+                case "filelist":
                     fileList()        
-                case "fileData":
+                case "filedata":
                     fileData()
-                case "fileRenamer":
+                case "filerenamer":
                     fileRenamer()
-                case "fileAlphabetizer":
+                case "filealphabetizer":
                     fileAlphabetizer()
-                case "fileEncoder":
+                case "fileencoder":
                     fileEncoder()
-                case "Exit":
+                case "filecompression":
+                    fileCompression()
+                case "fileversion":
+                    fileVersion()
+                case "exit":
                     exit()
     #If the user doesn't want to save the file then print it to the console, print that the file was not saved in red and bold using the custom variable///////
     else:
@@ -255,27 +352,19 @@ def fileData():
 
 def fileOrganizer():
     folder = input("Enter the folder you would like to organize: ")
-    #Selecting all files in the folder
     files = os.listdir(folder)
-    # Listing the files in the folder 
-    print("\033[92mFiles in the folder↓\033[0m")
-
-    #Loop through the files
+    print(colors.YELLOW + colors.BOLD + "Files in the folder ↓" + colors.END)
     for file in files:
-        print("\033[93m" "Selected " + file + "\033[0m")
-        # If you don't like this ↓ just comment it out 
-        #print("----------------------------------------------------------------------------------------------")
-        #File Extension
+        print(colors.WHITE + colors.BOLD + "Selected " + file + colors.END)
         ext = file.split(".")[-1]
         #Create the folder if it doesn't exist
         if not os.path.exists(folder + "/" + ext):
             os.mkdir(folder + "/" + ext)
         #Move the file to the folder  
         shutil.move(folder + "/" + file, folder + "/" + ext + "/" + file)   
-        print("\033[92m" + file + " Moved Successfully" "\033[0m")
+        print(colors.GREEN + colors.BOLD + "Moved " + file + " to " + ext + colors.END)
+        print(colors.YELLOW + colors.BOLD + "File Extension: " + ext + colors.END)
 
-        #Print out the file extension of each file 
-        print("\033[94m" + "File Extension: " + ext + "\033[0m")
 
         #Print out the whole path of the location the file was moved to
         print("\033[94m" + "File Location: " + folder + "/" + ext + "/" + file + "\033[0m")
@@ -286,36 +375,41 @@ def fileOrganizer():
     else:
         other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
-            function = input("Which function would you like to use? ( FileRenamer | FileList | FileData | FileType | FileEncoder | FileAlphabetizer | Exit): ")
-            match function:
-                case "fileRenamer":
+            function = input("Which function would you like to use? ( FileRenamer | FileList | FileData | FileType | FileEncoder | FileAlphabetizer | FileCompression | Exit): ")
+            match function.lower():
+                case "filerenamer":
                     fileRenamer()                    
-                case "fileList":
+                case "filelist":
                     fileList()        
-                case "fileData":
+                case "filedata":
                     fileData()
-                case "fileType":
+                case "filetype":
                     fileType()
                 case "fileencoder":
                     fileEncoder()
-                case "fileAlphabetizer":
+                case "filealphabetizer":
                     fileAlphabetizer()
-                case "Exit":
+                case "filecompression":
+                    fileCompression()
+                case "fileversion":
+                    fileVersion()
+                case "exit":
                     exit()             
 
 def fileRenamer():
     folder = input("Enter the folder you would like to rename the images in: ")
     files = os.listdir(folder)
-    print("\033[92mFiles in the folder↓\033[0m")
+    print(colors.YELLOW + colors.BOLD + "Files in the folder ↓" + colors.END)
     for file in files:
-        print("\033[93m" "Selected " + file + "\033[0m")
+        print(colors.WHITE + colors.BOLD + "Selected " + file + colors.END)
         ext = file.split(".")[-1]
         os.rename(folder + "/" + file, folder + "/" + str(files.index(file) + 1) + "." + ext)
-        print("\033[92m" + file + " Renamed Successfully" "\033[0m")
-        print("\033[94m" + "Original File Name: " + file + "\033[0m")
-        print("\033[94m" + "New File Name: " + str(files.index(file) + 1) + "." + ext + "\033[0m")
-        print("\033[94m" + "File Location: " + folder + "/" + str(files.index(file) + 1) + "." + ext + "\033[0m")
-        print("\033[91m" + "Time Finished: " + time.strftime("%H:%M:%S") + "\033[0m")
+        print(colors.GREEN + colors.BOLD + file + " Renamed Successfully" + colors.END)
+        print(colors.BLUE + "Original File Name: " + file + colors.END)
+        print(colors.YELLOW + "New File Name: " + str(files.index(file) + 1) + "." + ext + colors.END)
+        print(colors.GREY + "File Location: " + folder + "/" + str(files.index(file) + 1) + "." + ext + colors.END)
+        print(colors.RED + "Time Finished: " + time.strftime("%H:%M:%S") + colors.END)
+
 
         print("----------------------------------------------------------------------------------------------")
     again = input("Would you like to rename another folder? (y/n): ")
@@ -325,28 +419,29 @@ def fileRenamer():
         #
         other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
-            function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileEncoder | FileAlphabetizer | Exit): ")
+            function = input("Which function would you like to use? ( FileOrganizer | FileList | FileData | FileType | FileEncoder | FileAlphabetizer | FileCompression | Exit): ")
             match function.lower():
-                case "fileOrganizer":
+                case "fileorganizer":
                     fileOrganizer()  
-                case "fileList":
+                case "filelist":
                     fileList()        
-                case "fileType":
+                case "filetype":
                     fileType()
-                case "fileData":
+                case "filedata":
                     fileData()
                 case "filealphabetizer":
                     fileAlphabetizer()
                 case "fileencoder":
                     fileEncoder()
-                case "Exit":
+                case "filecompression":
+                    fileCompression()
+                case "exit":
                     exit()
 
 def fileList():
     folder = input("Enter the folder you would like to list the images in: ")
     save = input("Ask the user a location to save the finished text document")
-    #Print when the folder is loaded
-    print("\033[92m" + "Folder Loaded" + "\033[0m")
+    print(colors.YELLOW + colors.BOLD + "Folder Loaded" + colors.END)
     files = os.listdir(folder)
     #Open user specified file and write the data to it
     with open(save + ".txt", "w") as f:
@@ -365,7 +460,7 @@ def fileList():
         else:
             other = input("Would you like to use any of the other functions? (y/n): ")
         if other == "y":
-            function = input("Which function would you like to use? ( FileOrganizer | FileData | FileType | FileEncoder | FileAlphabetizer | Exit): ")
+            function = input("Which function would you like to use? ( FileOrganizer | FileData | FileType | FileEncoder | FileAlphabetizer | FileCompression | Exit): ")
             match function.lower():
                 case "fileOrganizer":
                     fileOrganizer()         
@@ -377,10 +472,12 @@ def fileList():
                     fileAlphabetizer()
                 case "fileencoder":
                     fileEncoder()
+                case "fileCompression":
+                    fileCompression()
+                case "fileversion":
+                    fileVersion()
                 case "Exit":
                     exit()
                 
 if __name__ == "__main__":
     main()
-
-    
