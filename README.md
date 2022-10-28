@@ -83,7 +83,7 @@ It is known that there may not be any folder names matching with the filetype(Ca
  
   * 0.6
   ------- 
-  * Added 2 but techniqually 1 real useable function  
+   * Added 2 but techniqually 1 real useable function  
     fileversion
     filecompression
     
@@ -93,6 +93,9 @@ It is known that there may not be any folder names matching with the filetype(Ca
     File Compression
     - Select a location in which you have a bunch of files, pick a save location for the compression zip/tar/tar.gz and compresses the file for you!
 
+  * 0.7
+  -------
+  * Created functionSelector and code cleanup
 ## License
 
 This project is licensed under the GNU General Public License v3.0 License - see the LICENSE.md file for details
